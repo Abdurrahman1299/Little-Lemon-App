@@ -1,0 +1,33 @@
+{
+  "expo": {
+    "name": "Little Lemon App",
+    "slug": "Little Lemon App",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./img/logoImg.png",
+    "userInterfaceStyle": "automatic",
+    "splash": {
+      "image": "./img/logoImg.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#ffffff"
+    },
+    "updates": {
+      "fallbackToCacheTimeout": 0
+    },
+    "assetBundlePatterns": ["**/*"],
+    "ios": {
+      "supportsTablet": true,
+      "userInterfaceStyle": "automatic"
+    },
+    "android": {
+      "userInterfaceStyle": "automatic",
+      "adaptiveIcon": {
+        "foregroundImage": "./img/logoImg.png",
+        "backgroundColor": "#FFFFFF"
+      }
+    },
+    "web": {
+      "favicon": "./img/logoImg.png"
+    }
+  }
+}

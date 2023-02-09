@@ -1,0 +1,5 @@
+1. Keep in mind that the ScrollView should always be bounded by height.
+
+2. in importing process, it is a must to leave the braces around the variable because it is a variable not a funciton (or a component)
+
+3. indicatorStyle={"black"} is a property of the <ScrollView></ScrollView> in (IOS) only
