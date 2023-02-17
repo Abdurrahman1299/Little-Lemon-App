@@ -3,7 +3,7 @@
     "name": "Little Lemon App",
     "slug": "Little Lemon App",
     "version": "1.0.0",
-    "orientation": "portrait",
+    "orientation": "automatic",
     "icon": "./img/logoImg.png",
     "userInterfaceStyle": "automatic",
     "splash": {

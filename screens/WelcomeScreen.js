@@ -1,22 +1,19 @@
-import { useState } from "react";
 import {
   StyleSheet,
   Text,
   View,
   ScrollView,
   KeyboardAvoidingView,
-  Platform,
   Image,
-  ImageBackground,
   useColorScheme,
-  Pressable,
 } from "react-native";
 // it is a must to leave the braces because it is a variable not a funciton (component)
 import {
-  grayColor,
-  lightGray,
-  whiteColor,
-  yellowColor,
+  darkGray,
+  darkGreen,
+  darkYellow,
+  lightWhite,
+  lightYellow,
 } from "../assets/constants";
 
 export default function WelcomeScreen({ navigation }) {
@@ -28,8 +25,8 @@ export default function WelcomeScreen({ navigation }) {
       style={[
         styles.container,
         colorScheme === "dark"
-          ? { backgroundColor: grayColor }
-          : { backgroundColor: whiteColor },
+          ? { backgroundColor: darkGray }
+          : { backgroundColor: lightWhite },
       ]}
       // array of objects not strings
     >
@@ -47,8 +44,8 @@ export default function WelcomeScreen({ navigation }) {
             style={[
               styles.title,
               colorScheme === "dark"
-                ? { color: whiteColor }
-                : { color: lightGray },
+                ? { color: lightYellow }
+                : { color: darkGreen },
             ]}
           >
             Little Lemon
@@ -58,8 +55,8 @@ export default function WelcomeScreen({ navigation }) {
           style={[
             styles.text,
             colorScheme === "dark"
-              ? { color: whiteColor }
-              : { color: lightGray },
+              ? { color: lightWhite }
+              : { color: darkGray },
           ]}
         >
           Little Lemon is a charming neighborhood bistro that serves simple food
@@ -77,6 +74,7 @@ export default function WelcomeScreen({ navigation }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    paddingVertical: 24,
   },
   header: {
     display: "flex",
@@ -89,13 +87,14 @@ const styles = StyleSheet.create({
     borderBottomWidth: 2,
     fontSize: 30,
     fontWeight: "bold",
-    borderBottomColor: yellowColor,
+    borderBottomColor: darkYellow,
     paddingVertical: 8,
   },
   text: {
     fontSize: 24,
     textAlign: "center",
-    padding: 16,
+    paddingVertical: 16,
+    paddingHorizontal: 36,
   },
   logoImg: {
     width: 100,
@@ -104,8 +103,6 @@ const styles = StyleSheet.create({
   },
   button: {
     fontSize: 24,
-    backgroundColor: whiteColor,
-    color: yellowColor,
     textAlign: "center",
     marginHorizontal: 90,
     paddingVertical: 8,

@@ -5,45 +5,66 @@ import {
   TextInput,
   ScrollView,
   View,
-  KeyboardAvoidingView,
-  Alert,
   Pressable,
   useColorScheme,
 } from "react-native";
 // it is a must to leave the braces because it is a variable not a funciton (component)
 import {
   lightGray,
-  whiteColor,
-  yellowColor,
-  grayColor,
+  darkGray,
+  lightGreen,
+  lightWhite,
+  darkGreen,
+  darkYellow,
+  lightYellow,
 } from "../assets/constants";
 
-export default function WelcomeScreen() {
+export default function LoginScreen({ toggelLogin }) {
   const [logedin, setLogedin] = useState(false);
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
   const colorScheme = useColorScheme();
   return (
-    <KeyboardAvoidingView
+    <View
       style={[
         styles.container,
         colorScheme === "dark"
-          ? { backgroundColor: grayColor }
-          : { backgroundColor: whiteColor },
+          ? { backgroundColor: darkGray }
+          : { backgroundColor: lightWhite },
       ]}
     >
-      <Text style={styles.title}>Welcome to Little Lemon</Text>
+      <Text
+        style={[
+          styles.title,
+          colorScheme === "dark"
+            ? { color: lightYellow }
+            : { color: darkYellow },
+        ]}
+      >
+        Welcome to Little Lemon
+      </Text>
+
       {!logedin ? (
-        <ScrollView keyboardDismissMode="on-drag">
-          <Text style={styles.title}>Login to continue</Text>
+        <ScrollView keyboardDismissMode="none">
+          <Text
+            style={[
+              styles.title,
+              colorScheme === "dark"
+                ? { color: lightYellow }
+                : { color: darkYellow },
+            ]}
+          >
+            Login to continue
+          </Text>
           <TextInput
             style={styles.textInput}
             value={username}
             placeholder={"username"}
             onChangeText={setUsername}
-            cursorColor={yellowColor}
+            cursorColor={darkYellow}
             keyboardType="email-address"
+            maxLength={16}
             // onFocus={() => Alert.alert("username is focused")}
             // onBlur={() => Alert.alert("username is blurred")}
           />
@@ -52,29 +73,79 @@ export default function WelcomeScreen() {
             value={password}
             placeholder={"PIN"}
             onChangeText={setPassword}
-            cursorColor={yellowColor}
+            cursorColor={darkYellow}
             keyboardType="numeric"
             secureTextEntry
             maxLength={4}
           />
-          <Pressable
-            style={styles.inButton}
-            onPress={() => {
-              setLogedin(!logedin);
-            }}
-          >
-            {!logedin ? <Text style={styles.buttonText}>Login</Text> : ""}
-          </Pressable>
+          {username === "" || password === "" ? (
+            <Pressable style={[styles.inButton, { opacity: 0.4 }]} disabled>
+              {!logedin ? (
+                <Text
+                  style={[
+                    styles.buttonText,
+                    colorScheme === "dark"
+                      ? { backgroundColor: darkYellow }
+                      : { backgroundColor: darkGreen },
+                  ]}
+                >
+                  Login
+                </Text>
+              ) : (
+                ""
+              )}
+            </Pressable>
+          ) : (
+            <Pressable
+              style={[styles.inButton]}
+              onPress={() => {
+                setLogedin(!logedin);
+              }}
+            >
+              {!logedin ? (
+                <Text
+                  style={[
+                    styles.buttonText,
+                    colorScheme === "dark"
+                      ? { backgroundColor: darkYellow }
+                      : { backgroundColor: darkGreen },
+                  ]}
+                >
+                  Login
+                </Text>
+              ) : (
+                ""
+              )}
+            </Pressable>
+          )}
         </ScrollView>
       ) : (
         <>
-          <Text style={styles.whenLogedin}>You are Loged In!</Text>
-          <Pressable onPress={() => setLogedin(!logedin)}>
-            <Text style={styles.backButton}>Back</Text>
+          <Text
+            style={[
+              styles.whenLogedin,
+              colorScheme === "dark"
+                ? { color: lightYellow }
+                : { color: darkYellow },
+            ]}
+          >
+            You are Loged In!
+          </Text>
+          <Pressable onPress={() => toggelLogin()}>
+            <Text
+              style={[
+                styles.backButton,
+                colorScheme === "dark"
+                  ? { color: darkYellow }
+                  : { color: darkYellow },
+              ]}
+            >
+              Explore Our Menu
+            </Text>
           </Pressable>
         </>
       )}
-    </KeyboardAvoidingView>
+    </View>
   );
 }
 
@@ -87,7 +158,6 @@ const styles = StyleSheet.create({
     fontSize: 30,
     fontWeight: "bold",
     textAlign: "center",
-    color: whiteColor,
     marginTop: 20,
     marginBottom: 36,
   },
@@ -96,24 +166,28 @@ const styles = StyleSheet.create({
     paddingVertical: 8,
     marginVertical: 4,
     borderRadius: 8,
-    backgroundColor: whiteColor,
-    color: lightGray,
+    borderColor: darkYellow,
+    borderWidth: 1.4,
+    backgroundColor: lightGray,
+    color: darkGray,
   },
   inButton: {
     paddingVertical: 8,
     marginVertical: 18,
     borderRadius: 8,
-    backgroundColor: yellowColor,
   },
   buttonText: {
-    color: grayColor,
+    marginHorizontal: 32,
+    color: lightWhite,
+    fontSize: 18,
     fontWeight: "bold",
     textAlign: "center",
+    borderRadius: 8,
+    paddingVertical: 16,
   },
   whenLogedin: {
     fontSize: 24,
     fontWeight: "bold",
-    color: whiteColor,
     textAlign: "center",
   },
   backButton: {
@@ -121,10 +195,9 @@ const styles = StyleSheet.create({
     paddingHorizontal: 18,
     fontSize: 24,
     fontWeight: "bold",
-    color: grayColor,
     textAlign: "center",
-    backgroundColor: yellowColor,
     marginVertical: 36,
     borderRadius: 8,
+    backgroundColor: lightGreen,
   },
 });

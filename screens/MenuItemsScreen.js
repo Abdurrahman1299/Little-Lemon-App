@@ -5,8 +5,14 @@ import {
   SectionList,
   useColorScheme,
 } from "react-native";
-import { grayColor, lightGray, whiteColor } from "../assets/constants";
-import { yellowColor } from "../assets/constants";
+import {
+  darkGray,
+  darkYellow,
+  lightGray,
+  lightGreen,
+  lightWhite,
+  lightYellow,
+} from "../assets/constants";
 
 const menuItemsToDisplay = [
   {
@@ -52,25 +58,65 @@ const menuItemsToDisplay = [
   },
 ];
 
-// section header component
-const SectionHeader = ({ title }) => (
-  <View>
-    <Text style={styles.sectionHeader}>{title}</Text>
-  </View>
-);
-// each item
-const Item = ({ name, price }) => (
-  <View style={styles.item}>
-    <Text style={styles.innerText}>{name}</Text>
-    <Text style={styles.innerText}>{price}</Text>
-  </View>
-);
-
-const listHeader = () => <Text style={styles.listHeader}>.Menu.</Text>;
-
 // const listSeparator = () => <View style={styles.listSeparator}></View>;
 
 export default function MenuItemsScreen() {
+  const listHeader = () => (
+    <Text
+      style={[
+        styles.listHeader,
+        colorScheme === "dark" ? { color: lightYellow } : { color: darkGray },
+      ]}
+    >
+      Menu
+    </Text>
+  );
+
+  // section header component
+  const SectionHeader = ({ title }) => (
+    <View>
+      <Text
+        style={[
+          styles.sectionHeader,
+          colorScheme === "dark" ? { color: darkYellow } : { color: darkGray },
+        ]}
+      >
+        {title}
+      </Text>
+    </View>
+  );
+  // each item
+  const Item = ({ name, price }) => (
+    <View
+      style={[
+        styles.item,
+        colorScheme === "dark"
+          ? { backgroundColor: lightGreen }
+          : { backgroundColor: lightGreen },
+      ]}
+    >
+      <Text
+        style={[
+          styles.innerText,
+          colorScheme === "dark" ? { color: lightGray } : { color: "white" },
+        ]}
+      >
+        {name}
+      </Text>
+      <Text
+        style={[
+          styles.innerText,
+          { fontWeight: "bold" },
+          colorScheme === "dark"
+            ? { color: lightGray }
+            : { color: lightYellow },
+        ]}
+      >
+        {price}
+      </Text>
+    </View>
+  );
+
   // color scheme
   const colorScheme = useColorScheme();
   // rendering functions
@@ -83,9 +129,9 @@ export default function MenuItemsScreen() {
     <View
       style={[
         styles.container,
-        colorScheme === "light"
-          ? { backgroundColor: whiteColor }
-          : { backgroundColor: grayColor },
+        colorScheme === "dark"
+          ? { backgroundColor: darkGray }
+          : { backgroundColor: lightWhite },
       ]}
     >
       <SectionList
@@ -110,6 +156,10 @@ const styles = StyleSheet.create({
     color: "white",
     fontSize: 40,
     textAlign: "center",
+    borderBottomColor: lightGray,
+    borderBottomWidth: 1,
+    marginBottom: 8,
+    paddingVertical: 16,
   },
   // listSeparator: {
   //   borderBottomWidth: 1,
@@ -120,26 +170,23 @@ const styles = StyleSheet.create({
     fontSize: 34,
     fontWeight: "bold",
     textAlign: "center",
-    color: yellowColor,
   },
   item: {
     flexDirection: "row",
     justifyContent: "space-between",
-    paddingVertical: 8,
+    paddingVertical: 12,
     paddingHorizontal: 16,
     margin: 8,
-    backgroundColor: lightGray,
     borderRadius: 8,
   },
   innerText: {
     fontSize: 18,
-    color: yellowColor,
+    color: darkGray,
   },
-  footerText: {
-    backgroundColor: yellowColor,
-    fontSize: 18,
-    textAlign: "center",
-    color: "black",
-    fontStyle: "italic",
-  },
+  // footerText: {
+  //   fontSize: 18,
+  //   textAlign: "center",
+  //   color: "black",
+  //   fontStyle: "italic",
+  // },
 });
